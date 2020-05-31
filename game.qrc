@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/pics">
+        <file>TileB.png</file>
+        <file>renwu.jpg</file>
+    </qresource>
+    <qresource prefix="/sounds">
+        <file>2953.mp3</file>
+        <file>hdl.mp3</file>
+        <file>crash.mp3</file>
+        <file>beijing.mp3</file>
+        <file>jujue.mp3</file>
+        <file>shengli.mp3</file>
+    </qresource>
+</RCC>
