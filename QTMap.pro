@@ -26,6 +26,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += main.cpp\
     Fruit.cpp \
+    mainwindow.cpp \
     mw1.cpp \
     icon.cpp \
     rpgobj.cpp \
@@ -33,10 +34,12 @@ SOURCES += main.cpp\
     world.cpp
 
 HEADERS  += \
+    mainwindow.h \
     mw1.h \
     icon.h \
     rpgobj.h \
     player.h \
+    ui_mainwindow.h \
     world.h \
     fruit.h
 

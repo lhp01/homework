@@ -10,7 +10,7 @@ void RPGObj::initObj(string type)
     }
     else if (type.compare("stone")==0){
         this->_coverable = false;
-        this->_eatable = false;
+        this->_eatable = true;
     }
     else if (type.compare("fruit")==0){
         this->_coverable = false;
@@ -58,7 +58,7 @@ int RPGObj::getNextY(int direction){
 
 void RPGObj::onErase(){
     QMediaPlayer * player = new QMediaPlayer;
-    player->setMedia(QUrl("qrc:/sounds/shengli.mp3"));
+    player->setMedia(QUrl("qrc:/sounds/jujue.mp3"));
     player->setVolume(30);
     player->play();
 }

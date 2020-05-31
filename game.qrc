@@ -2,6 +2,7 @@
     <qresource prefix="/pics">
         <file>TileB.png</file>
         <file>renwu.jpg</file>
+        <file>bj.jpg</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>2953.mp3</file>

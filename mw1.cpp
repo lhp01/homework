@@ -46,18 +46,22 @@ void MW1::keyPressEvent(QKeyEvent *e)
     if(e->key() == Qt::Key_A)
     {
         this->_game.handlePlayerMove(3,1);
+
     }
     else if(e->key() == Qt::Key_D)
     {
         this->_game.handlePlayerMove(4,1);
+
     }
     else if(e->key() == Qt::Key_W)
     {
         this->_game.handlePlayerMove(1,1);
+
     }
     else if(e->key() == Qt::Key_S)
     {
          this->_game.handlePlayerMove(2,1);
+
     }
     this->repaint();
 }

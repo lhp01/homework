@@ -7,7 +7,7 @@ pair<string,ICON> pairArray[] =
 {
     make_pair("player",ICON("player",3,3,3,3)),
     make_pair("stone",ICON("stone",0,3,3,3)),
-    make_pair("fruit",ICON("fruit",3,0,3,3))
+    make_pair("fruit",ICON("fruit",3,0,3,3)),
 };
 
 map<string,ICON> ICON::GAME_ICON_SET(pairArray,pairArray+sizeof(pairArray)/sizeof(pairArray[0]));
