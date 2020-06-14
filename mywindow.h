@@ -11,6 +11,7 @@ public:
     explicit Mywindow(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent*);
     void set_plants();
+    void next_task();
 private:
     QList<plants*> plants_list;
 signals:

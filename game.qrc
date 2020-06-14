@@ -3,6 +3,20 @@
         <file>TileB.png</file>
         <file>bj.jpg</file>
         <file>duixiang.png</file>
+        <file>renwu.jpg</file>
+        <file>single.jpg</file>
+        <file>four.jpg</file>
+        <file>leaves.jpg</file>
+        <file>sunflower.jpg</file>
+        <file>plant.jpg</file>
+        <file>double.jpg</file>
+        <file>kaishi.jpg</file>
+        <file>begin.jpg</file>
+        <file>exit.jpg</file>
+        <file>1.jpg</file>
+        <file>2.jpg</file>
+        <file>3.jpg</file>
+        <file>tongguan.jpg</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>2953.mp3</file>

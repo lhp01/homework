@@ -23,20 +23,26 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # You can also select to disable deprecated APIs only up to a certain version of Qt.
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
-
 SOURCES += main.cpp\
     Fruit.cpp \
     mainwindow.cpp \
     mw1.cpp \
     icon.cpp \
+    mybutton.cpp \
+    mywindow.cpp \
+    plants.cpp \
     rpgobj.cpp \
     player.cpp \
     world.cpp
 
 HEADERS  += \
     mainwindow.h \
+    mybutton.h \
+    mywindow.h \
+    plants.h \
     mw1.h \
     icon.h \
+    pushbutton.h \
     rpgobj.h \
     player.h \
     ui_mainwindow.h \
@@ -48,7 +54,11 @@ FORMS    += \
 
 DISTFILES += \
     ../../Downloads/3.3.28 �������� jc .docx \
-    ../../Downloads/3619.txt
+    ../../Downloads/3619.txt \
+    button.pro.user
 
 RESOURCES += \
     game.qrc
+
+SUBDIRS += \
+    button.pro

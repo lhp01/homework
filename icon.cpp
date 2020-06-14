@@ -1,13 +1,13 @@
 #include "icon.h"
 #include<iostream>
-int ICON::GRID_SIZE = 32;
+int ICON::GRID_SIZE = 50;
 
 
 pair<string,ICON> pairArray[] =
 {
-    make_pair("player",ICON("player",3,3,3,3)),
-    make_pair("stone",ICON("stone",0,3,3,3)),
-    make_pair("fruit",ICON("fruit",3,0,3,3)),
+    make_pair("player",ICON("player",18,8,2,2)),
+    make_pair("stone",ICON("stone",11,4,2,2)),
+    make_pair("fruit",ICON("fruit",13,4,2,2)),
 };
 
 map<string,ICON> ICON::GAME_ICON_SET(pairArray,pairArray+sizeof(pairArray)/sizeof(pairArray[0]));

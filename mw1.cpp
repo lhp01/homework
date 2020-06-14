@@ -73,3 +73,5 @@ void MW1::randomMove(){
     this->repaint();
 }
 
+
+

@@ -25,7 +25,7 @@ void RPGObj::initObj(string type)
     this->_icon = ICON::findICON(type);
     QImage all;
 
-    all.load(":/pics/duixiang.png");
+    all.load(":/pics/renwu.jpg");
     this->_pic = all.copy(QRect(_icon.getSrcX()*ICON::GRID_SIZE, _icon.getSrcY()*ICON::GRID_SIZE, _icon.getWidth()*ICON::GRID_SIZE, _icon.getHeight()*ICON::GRID_SIZE));
 }
 
