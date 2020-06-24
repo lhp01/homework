@@ -4,18 +4,23 @@
 #include <QMainWindow>
 #include <QList>
 #include "plants.h"
-class Mywindow : public QMainWindow
+#include "stage.h"
+class StageChoose : public QMainWindow
 {
     Q_OBJECT
 public:
-    explicit Mywindow(QWidget *parent = nullptr);
+    explicit StageChoose(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent*);
-    void set_plants();
     void next_task();
-private:
-    QList<plants*> plants_list;
 signals:
     void chooseBack();
+protected:
+
+
+private:
+    QList<plants*> plants_list;
+    Stage *stage;
+
 };
 
 #endif // MYWINDOW_H

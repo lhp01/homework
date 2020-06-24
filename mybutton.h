@@ -8,7 +8,7 @@ class mybutton : public QPushButton
     Q_OBJECT
 public:
     explicit mybutton(QWidget *parent = nullptr);
-    mybutton(QString pix);
+    mybutton(QString pix, QWidget *parent = nullptr);
 signals:
 
 public slots:

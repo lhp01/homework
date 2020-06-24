@@ -1,4 +1,4 @@
-#include "mw1.h"
+#include "stage.h"
 #include <QApplication>
 #include "mainwindow.h"
 int main(int argc, char *argv[])

@@ -6,7 +6,7 @@
 #include <QPaintEvent>
 #include <QPixmap>
 #include "mybutton.h"
-#include "mywindow.h"
+#include "stagechoose.h"
 MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWindow)
 {
     this->setFixedSize(1800,900);
@@ -15,14 +15,16 @@ MainWindow::MainWindow(QWidget *parent): QMainWindow(parent), ui(new Ui::MainWin
     btn->setFixedSize(400,200);
     btn->setParent(this);
     btn->move(250,40);
-    Mywindow *scene=new Mywindow;
+    StageChoose *scene=new StageChoose(this);
+    scene->hide();
     connect(btn,&QPushButton::clicked,this,[=](){
-            this->hide();
+            //this->hide();
             scene->show();
         });
-   connect(scene,&Mywindow::chooseBack,this,[=](){
+
+   connect(scene,&StageChoose::chooseBack,this,[=](){
                 scene->hide();
-                this->show();
+              //  this->show();
             });
    //mywindow back_btn clicked emit chooseBackz
 }

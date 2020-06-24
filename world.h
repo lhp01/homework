@@ -6,7 +6,7 @@
 #include <string>
 #include <QPainter>
 #include "player.h"
-
+#include "QMediaPlayer"
 class World
 {
 public:
@@ -28,7 +28,8 @@ public:
 
 private:
     vector<RPGObj *> _objs;
-    Player * _player;
+    QMediaPlayer * player;
+    Player *_player;
 };
 
 #endif // WORLD_H

@@ -1,11 +1,14 @@
-#include "mywindow.h"
+#include "stagechoose.h"
 #include "mybutton.h"
 #include <QPainter>
-#include "mw1.h"
+
 #include <QApplication>
-Mywindow::Mywindow(QWidget *parent) : QMainWindow(parent)
+StageChoose::StageChoose(QWidget *parent) : QMainWindow(parent)
 {
+    stage = nullptr;
+
    this->setFixedSize(1800,900);
+    this->setWindowFlags(Qt::SubWindow);
     mybutton *back_btn=new mybutton(":pics/exit.jpg");
     back_btn->setFixedSize(400,200);
     back_btn->setParent(this);
@@ -22,28 +25,35 @@ Mywindow::Mywindow(QWidget *parent) : QMainWindow(parent)
     a3->setFixedSize(250,250);
     a3->setParent(this);
     a3->move(1000,500);
+    //Stage *mw= new Stage(this);
+
     connect(a1,&mybutton::clicked,this,[=](){
-        this->hide();
-       MW1 *mw= new MW1;
-       mw->show();
+        //this->hide();
+        if(!this->stage)
+        {
+            stage = new Stage(this);
+            connect(stage, &Stage::reChooseSignal, this, [=](){stage->close();stage = NULL;});
+            connect( stage,&Stage::returnSignal, this,  [=](){stage->close(); stage = NULL;emit chooseBack();});
+        }
+       stage->show();
     });
-    connect(a2,&mybutton::clicked,this,&Mywindow::next_task);
-    connect(a3,&mybutton::clicked,this,&Mywindow::next_task);
+    connect(a2,&mybutton::clicked,this,&StageChoose::next_task);
+    connect(a3,&mybutton::clicked,this,&StageChoose::next_task);
     connect(back_btn,&mybutton::clicked,this,[=](){
         emit chooseBack();
     });
 }
-void Mywindow::paintEvent(QPaintEvent*){
+void StageChoose::paintEvent(QPaintEvent*){
     QPainter painter(this);
+
+         painter.setBrush(Qt::white);//可以改成背景图片
+
+         painter.drawRect(this->rect());
+   /* QPainter painter(this);
     foreach(plants* plants,plants_list)
         plants->draw(&painter);
-}
-void Mywindow::set_plants(){
-    plants * newplants= new plants(QPoint(200,200),":pics/single.jpg");
-    plants_list.push_back(newplants);
-    update();
-}
-void Mywindow::next_task(){
+*/}
+void StageChoose::next_task(){
     plants * newplants= new plants(QPoint(200,200),":pics/tongguan.jpg");
     plants_list.push_back(newplants);
     update();
