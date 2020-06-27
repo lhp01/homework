@@ -1,16 +1,17 @@
 #include "stage.h"
 //#include "ui_Stage.h"
 #include "icon.h"
-#include <QTime>
-#include<QTimer>
+#include <QDebug>
 #include <map>
 #include <iostream>
 #include "stagechoose.h"
 
-using namespace std;
+//using namespace std;
+/*
 void Stage::set_plants1(){
     plants * newplants= new plants(QPoint(300,100),":pics/single.jpg");
     plants_list.push_back(newplants);
+
     update();
 }
 void Stage::set_plants2(){
@@ -97,26 +98,54 @@ void Stage::set_plants62(){
     plants * newplants= new plants(QPoint(300,600),":pics/four.jpg");
     plants_list.push_back(newplants);
     update();
-}
+}*/
 void Stage::paintEvent(QPaintEvent *e){
-    QPainter *pa;
+   /* QPainter *pa;
     pa = new QPainter();
     pa->begin(this);
-    this->_game.show(pa);
+    this->_game->show(pa);
     pa->end();
     delete pa;
     QPainter painter(this);
 foreach(plants* plants,plants_list)
-    plants->draw(&painter);
+    plants->draw(&painter);*/
+    //if(painter == NULL)
+    //{
+        //painter = new QPainter(this);
+    //}
+    QPainter *pa = new QPainter;
+    pa->begin(this);
+    this->_game->show(pa);
+    pa->end();
+    //painter->begin(this);
+    //this->_game->show(painter);
+    //this->_game->update_map();
+    //painter->end();
+//foreach(plants* plants,plants_list)
+  //  plants->draw(&painter);
+}
+void Stage::mousePressEvent(QMouseEvent *event)
+{
+    if(this->generate_plant_mode)
+    {
+        int y = event->y()/50/2;
+        int x = event->x()/50/2;
+        bool  success = _game->generate_plant(x,y);
+        if(success)
+            generate_plant_mode = false;
+    }
 }
 Stage::Stage(QWidget *parent) :
-    QWidget(parent)
+    QWidget(parent),generate_plant_mode(0)
     //,ui(new Ui::Stage)
 {
     //ui->setupUi(this);
 
     //init game world
-
+    qDebug()<<"stage start";
+    painter = NULL;
+    _game = new World;
+    connect(_game,&World::reChooseSignal, this, &Stage::reChooseSignal);
     setAttribute(Qt::WA_DeleteOnClose);
     QPushButton *rechooseButton  = new QPushButton(this);
     rechooseButton->setText(tr("重新选择关卡"));
@@ -127,11 +156,17 @@ Stage::Stage(QWidget *parent) :
 
     QPushButton * returnTitleButton = new QPushButton(this);
     returnTitleButton ->setFixedSize(120,50);
-    returnTitleButton ->setParent(this);
+   // returnTitleButton ->setParent(this);
     returnTitleButton ->move(0,50);
     returnTitleButton->setText(tr("返回标题"));
     connect( returnTitleButton, &QPushButton::clicked, this, &Stage::returnSignal);
+    QPushButton * generatePlantButton = new QPushButton(this);
+    generatePlantButton->setFixedSize(120,50);
+    generatePlantButton->move(0,100);
+    generatePlantButton->setText(tr("放置植物"));
+    connect(generatePlantButton,&QPushButton::clicked,this,[=](){this->generate_plant_mode = true;});
 
+/*
     QPushButton *setplantsButton  = new QPushButton(this);
     setplantsButton->setParent(this);
     setplantsButton->setText(tr("plant here"));
@@ -246,57 +281,63 @@ Stage::Stage(QWidget *parent) :
     setplantsButton62->setFixedSize(100,30);
     setplantsButton62->move(200,670);
     connect( setplantsButton62, &QPushButton::clicked, this, &Stage::set_plants62);
-
-    _game.initWorld("");
+*/
+    _game->initWorld("");qDebug()<<"stage success";
     this->setFixedSize(1800,900);
     this->setWindowFlags(Qt::SubWindow);
-    timer = new QTimer(this);
-    connect(timer,SIGNAL(timeout()),this,SLOT(randomMove()));
+    //timer = new QTimer(this);
+    //connect(timer,SIGNAL(timeout()),this,SLOT(randomMove()));
         //randomMove()为自定义槽函数
 
-    timer->start(50);
-    timer->setInterval(500);
+    //timer->start(3);
+    //timer->setInterval(500);
 
-    qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));//设置随机种子
+    //qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));//设置随机种子
+
+
+    connect( _game, &World::update_signal, this, static_cast<void (Stage::*)()>(&Stage::repaint));
+
 }
 
 Stage::~Stage()
 {
     //delete ui;
+    delete _game;
 }
 
-void Stage::keyPressEvent(QKeyEvent *e)
+/*void Stage::keyPressEvent(QKeyEvent *e)
 {
     //direction = 1,2,3,4 for 上下左右
     if(e->key() == Qt::Key_A)
     {
-        this->_game.handlePlayerMove(3,1);
+        this->_game->handlePlayerMove(3,1);
 
     }
     else if(e->key() == Qt::Key_D)
     {
-        this->_game.handlePlayerMove(4,1);
+        this->_game->handlePlayerMove(4,1);
 
     }
     else if(e->key() == Qt::Key_W)
     {
-        this->_game.handlePlayerMove(1,1);
+        this->_game->handlePlayerMove(1,1);
 
     }
     else if(e->key() == Qt::Key_S)
     {
-         this->_game.handlePlayerMove(2,1);
+         this->_game->handlePlayerMove(2,1);
 
     }
     this->repaint();
 }
-
+*/
+/*
 void Stage::randomMove(){
 
     int d = 1 + rand()%3;//生成随机运动的方向
-    this->_game.handlePlayerMove(d,1);
+    this->_game->handlePlayerMove(d,1);
     this->repaint();
 }
-
+*/
 
 

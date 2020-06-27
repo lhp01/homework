@@ -1,6 +1,9 @@
 #include "rpgobj.h"
 #include <iostream>
 
+RPGObj::RPGObj(): gSize(ICON::GRID_SIZE),_hp(100)
+{}
+
 void RPGObj::initObj(string type)
 {
     //TODO 所支持的对象类型应定义为枚举
@@ -29,30 +32,31 @@ void RPGObj::initObj(string type)
     this->_pic = all.copy(QRect(_icon.getSrcX()*ICON::GRID_SIZE, _icon.getSrcY()*ICON::GRID_SIZE, _icon.getWidth()*ICON::GRID_SIZE, _icon.getHeight()*ICON::GRID_SIZE));
 }
 
+
 void RPGObj::show(QPainter * pa){
-    int gSize = ICON::GRID_SIZE;
-    pa->drawImage(this->_pos_x*gSize,this->_pos_y*gSize,this->_pic);
+
+    pa->drawImage(this->_pixel_x,this->_pixel_y,this->_pic);
 }
 
 int RPGObj::getNextX(int direction){
     switch (direction){
         case 1:
-            return this->_pos_x;
+            return this->posX();
         case 2:
-           return this->_pos_x;
+           return this->posY();
         case 3:
-           return this->_pos_x-1;
+           return this->posX()-1;
     }
 }
 
 int RPGObj::getNextY(int direction){
     switch (direction){
         case 1:
-            return this->_pos_y - 1;
+            return this->posY() - 1;
         case 2:
-           return this->_pos_y + 1;
+           return this->posY() + 1;
         case 3:
-           return this->_pos_y;
+           return this->posY();
     }
 }
 

@@ -3,23 +3,47 @@
 
 #include <QObject>
 #include <QPoint>
+#include "world.h"
 #include <QPixmap>
 #include <QPainter>
 #include <QTimer>
-class plants : public QObject
+class World;
+class plant_information
 {
-    Q_OBJECT
 public:
+    int index;
+    int damage;
+    int attack_times;
+    int level_up_index;
+};
+
+class plants : public RPGObj
+{
+public:
+    plants():RPGObj(){}
     plants(QPoint pos,QString pixFileName);
     void draw(QPainter *painter);
-    void attack();//创造一个类似于僵尸的豌豆对象，仿照僵尸的移动进行单向移动。同时改变僵尸的定义，每次移动后更新每一行最靠前的僵尸的坐标（简单粗暴的全局变量即可，或面向对象）
-    //然后豌豆对象每次移动对比该行僵尸位置，当坐标差变符号时销毁对象，僵尸掉血
-    //定时功能已完成
+
+    int index;
+    int damage();
+    int attack_times();
+    int level_up_index();
+
+
 private:
+
     QPoint _pos;
     QPixmap pixmap;
-signals:
 
+
+};
+
+class plant_attack :public RPGObj
+{
+public:
+    int index;
+    plant_attack(int id) :index(id){_hp=1;}
+    int damage();
 };
 
 #endif // PLANTS_H

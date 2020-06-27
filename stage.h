@@ -1,13 +1,15 @@
-#ifndef MW1_H
-#define MW1_H
+#ifndef STAGE_H
+#define STAGE_H
 #include <QList>
 #include "plants.h"
-#include <QWidget>
+
 #include <QImage>
 #include <QPainter>
 #include<QKeyEvent>
 #include<QTimer>
+#include <QTime>
 #include<QPushButton>
+#include <QMouseEvent>
 #include "rpgobj.h"
 #include "world.h"
 /*
@@ -21,10 +23,11 @@ class Stage : public QWidget
     Q_OBJECT
 
 public:
-    explicit Stage(QWidget *parent = 0);
+    Stage(QWidget *parent = 0);
     ~Stage();
     void paintEvent(QPaintEvent *e);
-    void keyPressEvent(QKeyEvent *);
+    //void keyPressEvent(QKeyEvent *);
+    /*
     void set_plants1();
         void set_plants11();
                 void set_plants12();
@@ -42,19 +45,22 @@ public:
                 void set_plants52();
     void set_plants6();
         void set_plants61();
-                void set_plants62();
+                void set_plants62();*/
+
+    QPainter* painter;
 signals:
     void returnSignal();
     void reChooseSignal();
 protected slots:
-    void randomMove();
+    //void randomMove();
+    void mousePressEvent(QMouseEvent *event);
 
 private:
     //Ui::MW1 *ui;
-    World _game;
+    World *_game;
     QTimer *timer;
     QList<plants*> plants_list;
-        Stage *stage;
+    bool generate_plant_mode;
 };
 
 #endif // MW1_H
