@@ -46,7 +46,7 @@ StageChoose::StageChoose(QWidget *parent) : QMainWindow(parent)
 void StageChoose::paintEvent(QPaintEvent*){
     QPainter painter(this);
 
-         painter.setBrush(Qt::white);//可以改成背景图片
+         painter.setBrush(Qt::white);
 
          painter.drawRect(this->rect());
    /* QPainter painter(this);

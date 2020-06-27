@@ -37,27 +37,14 @@ World::~World(){
 void World::initWorld(string mapFile){
     update_timer = new QTimer(this);
     connect( update_timer, &QTimer::timeout, this, &World::update_signal );
-    update_timer->start(3);//周期的单位为10ms
+    update_timer->start(20);//周期的单位为10ms
 
     player = new QMediaPlayer;
     player->setMedia(QUrl("qrc:/sounds/beijing.mp3"));
     player->setVolume(30);
     player->play();
-
-
-
-
-    //this->_player->initObj("player");
-    //this->_player->setPosX(13);
-    //this->_player->setPosY(6);
-
 qDebug()<<"here";
 
-
-   // RPGObj *p1 = new RPGObj;
-     //   p1->initObj("stone");
-       // p1->setPosX(12);
-        //p1->setPosY(2);
 }
 
 void World::update_map(QPainter* pa)
@@ -69,16 +56,16 @@ void World::update_map(QPainter* pa)
     {
         ++times;
        }
-        if( phase == peroid )//总周期
+        if( phase == peroid )
         {
              phase = 0;
         }
-        if( phase < plant_attack_time )//每周期50*10ms时间进行攻击
+        if( phase < plant_attack_time )
         {
               generate_attack();
         }
 
-        generate_zombie();//僵尸生成，可附加随机条件
+        generate_zombie();
         for(int i = 0; i<line;++i)
         {
             for(auto plant: plant_list[i])
@@ -95,9 +82,9 @@ void World::update_map(QPainter* pa)
             }
         }
 
-        move_attack();//任意时刻保持豌豆等攻击移动
+        move_attack();
 
-        if( phase < zombie_move_time )//每周期50*10ms僵尸移动
+        if( phase < zombie_move_time )
         {
             move_zombie();
         }
@@ -147,10 +134,10 @@ void World::generate_attack()
                 plant_attack *attack = new plant_attack(plant->index);
                 attack_list[i].push_back(attack);
                 attack->initObj("stone");
-                //设置attack图片为豌豆
 
-                attack->setPixelX(plant->pixelX()+ICON::GRID_SIZE/2);//待调整
-                attack->setPixelY(plant->pixelY()+ICON::GRID_SIZE/2);//待调整
+
+                attack->setPixelX(plant->pixelX()+ICON::GRID_SIZE/2);
+                attack->setPixelY(plant->pixelY()+ICON::GRID_SIZE/2);
                 //attack->show(painter);
             }
         }
