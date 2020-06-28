@@ -11,7 +11,6 @@ class StageChoose : public QMainWindow
 public:
     explicit StageChoose(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent*);
-    //void next_task();
 signals:
     void chooseBack();
 protected:
