@@ -1,8 +1,8 @@
 #ifndef STAGE_H
 #define STAGE_H
 #include <QList>
-#include "plants.h"
 
+#include <QLabel>
 #include <QImage>
 #include <QPainter>
 #include<QKeyEvent>
@@ -12,6 +12,7 @@
 #include <QMouseEvent>
 #include "rpgobj.h"
 #include "world.h"
+#include <QMessageBox>
 /*
 namespace Ui {
 class MW1;
@@ -47,7 +48,7 @@ public:
         void set_plants61();
                 void set_plants62();*/
 
-    QPainter* painter;
+    //QPainter* painter;
 signals:
     void returnSignal();
     void reChooseSignal();
@@ -58,8 +59,7 @@ protected slots:
 private:
     //Ui::MW1 *ui;
     World *_game;
-    QTimer *timer;
-    QList<plants*> plants_list;
+    QTimer *timer,*over_timer;
     bool generate_plant_mode;
 };
 

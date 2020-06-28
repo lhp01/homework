@@ -24,13 +24,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += main.cpp\
-    Fruit.cpp \
     mainwindow.cpp \
     icon.cpp \
     mybutton.cpp \
-    plants.cpp \
     rpgobj.cpp \
-    player.cpp \
     stage.cpp \
     stagechoose.cpp \
     world.cpp
@@ -38,19 +35,12 @@ SOURCES += main.cpp\
 HEADERS  += \
     mainwindow.h \
     mybutton.h \
-    plants.h \
     icon.h \
-    pushbutton.h \
     rpgobj.h \
-    player.h \
     stage.h \
     stagechoose.h \
-    ui_mainwindow.h \
-    world.h \
-    fruit.h
+    world.h
 
-FORMS    += \
-    mw1.ui
 
 DISTFILES += \
     ../../Downloads/3.3.28 �������� jc .docx \

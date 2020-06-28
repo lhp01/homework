@@ -25,10 +25,8 @@ StageChoose::StageChoose(QWidget *parent) : QMainWindow(parent)
     a3->setFixedSize(250,250);
     a3->setParent(this);
     a3->move(1000,500);
-    //Stage *mw= new Stage(this);
 
     connect(a1,&mybutton::clicked,this,[=](){
-        //this->hide();
         if(!this->stage)
         {
             stage = new Stage(this);
@@ -37,8 +35,10 @@ StageChoose::StageChoose(QWidget *parent) : QMainWindow(parent)
         }
        stage->show();
     });
-    connect(a2,&mybutton::clicked,this,&StageChoose::next_task);
-    connect(a3,&mybutton::clicked,this,&StageChoose::next_task);
+
+    connect(a2,&mybutton::clicked,this,[=](){QMessageBox::information(this, tr("提示"), tr("请先完成之前关卡"));});
+    connect(a3,&mybutton::clicked,this,[=](){QMessageBox::information(this, tr("提示"), tr("请先完成之前关卡"));});
+
     connect(back_btn,&mybutton::clicked,this,[=](){
         emit chooseBack();
     });
@@ -46,15 +46,8 @@ StageChoose::StageChoose(QWidget *parent) : QMainWindow(parent)
 void StageChoose::paintEvent(QPaintEvent*){
     QPainter painter(this);
 
-         painter.setBrush(Qt::white);
+         painter.setBrush(Qt::white);//可以改成背景图片
 
          painter.drawRect(this->rect());
-   /* QPainter painter(this);
-    foreach(plants* plants,plants_list)
-        plants->draw(&painter);
-*/}
-void StageChoose::next_task(){
-    plants * newplants= new plants(QPoint(200,200),":pics/tongguan.jpg");
-    plants_list.push_back(newplants);
-    update();
 }
+

@@ -1,14 +1,12 @@
 #ifndef WORLD_H
 #define WORLD_H
-#include "fruit.h"
+
 #include "rpgobj.h"
 #include <QVector>
 #include <vector>
 #include <string>
 #include <QPainter>
 #include <QTimer>
-#include "player.h"
-#include "plants.h"
 #include <QMediaPlayer>
 #include <QObject>
 class plant_information;
@@ -22,7 +20,7 @@ class World : public QObject
 public:
     World();
     ~World();
-    void initWorld(string mapFile);
+    void initWorld();
         //输入的文件中定义了初始状态下游戏世界有哪些对象，出生点在哪
         /*e.g.
            player 5 5
@@ -31,17 +29,20 @@ public:
          */
     void show(QPainter * painter);
         //显示游戏世界所有对象
-    void handlePlayerMove(int direction, int steps);
+   // void handlePlayerMove(int direction, int steps);
         //假定只有一个玩家
 
-    void eraseObj(int x, int y);
+    //void eraseObj(int x, int y);
 
-    static plant_information plant_information_table[10];
+    //static plant_information plant_information_table[10];
     bool generate_plant(int x, int y);
     void update_map(QPainter *pa);
+    int over;
+    int gold;
 signals:
     void update_signal();
     void reChooseSignal();
+
 protected:
 
 
@@ -56,18 +57,19 @@ protected:
 private:
 
     QList<RPGObj *> zombie_list[6];
-    QList<plants *> plant_list[6];
-    QList<plant_attack *> attack_list[6];
+    QList<RPGObj *> plant_list[6];
+    QList<RPGObj *> attack_list[6];
     QTimer * update_timer;
-    int times;
+
     int line;
     int phase;
     int peroid;
     int plant_attack_time;
     int zombie_move_time;
-    vector<RPGObj *> _objs;
+    int times;
+    //vector<RPGObj *> _objs;
     QMediaPlayer * player;
-    Player *_player;
+    //Player *_player;
     QPainter* painter;
 };
 

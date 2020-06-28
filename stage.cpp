@@ -1,37 +1,21 @@
 #include "stage.h"
 //#include "ui_Stage.h"
 #include "icon.h"
-#include <QDebug>
 #include <map>
 #include <iostream>
 #include "stagechoose.h"
 
-//using namespace std;
-
-void Stage::paintEvent(QPaintEvent *e){
-   /* QPainter *pa;
-    pa = new QPainter();
-    pa->begin(this);
-    this->_game->show(pa);
-    pa->end();
-    delete pa;
-    QPainter painter(this);
-foreach(plants* plants,plants_list)
-    plants->draw(&painter);*/
-    //if(painter == NULL)
-    //{
-        //painter = new QPainter(this);
-    //}
+void Stage::paintEvent(QPaintEvent *){
+    if(!_game->over)
+    {
     QPainter *pa = new QPainter;
     pa->begin(this);
-    this->_game->show(pa);
+
+        this->_game->show(pa);
     pa->end();
-    //painter->begin(this);
-    //this->_game->show(painter);
-    //this->_game->update_map();
-    //painter->end();
-//foreach(plants* plants,plants_list)
-  //  plants->draw(&painter);
+
+    }
+
 }
 void Stage::mousePressEvent(QMouseEvent *event)
 {
@@ -46,13 +30,9 @@ void Stage::mousePressEvent(QMouseEvent *event)
 }
 Stage::Stage(QWidget *parent) :
     QWidget(parent),generate_plant_mode(0)
-    //,ui(new Ui::Stage)
 {
-    //ui->setupUi(this);
 
-    //init game world
     qDebug()<<"stage start";
-    painter = NULL;
     _game = new World;
     connect(_game,&World::reChooseSignal, this, &Stage::reChooseSignal);
     setAttribute(Qt::WA_DeleteOnClose);
@@ -72,28 +52,46 @@ Stage::Stage(QWidget *parent) :
     QPushButton * generatePlantButton = new QPushButton(this);
     generatePlantButton->setFixedSize(120,50);
     generatePlantButton->move(0,100);
-    generatePlantButton->setText(tr("放置植物￥150"));
+    generatePlantButton->setText(tr("放置/升级植物"));
     connect(generatePlantButton,&QPushButton::clicked,this,[=](){this->generate_plant_mode = true;});
 
-    QPushButton * updatePlantButton = new QPushButton(this);
-    updatePlantButton->setFixedSize(120,50);
-    updatePlantButton->move(0,150);
-    updatePlantButton->setText(tr("升级植物￥300"));
-    connect(updatePlantButton,&QPushButton::clicked,this,[=](){this->generate_plant_mode = true;});
-
-
-    _game->initWorld("");qDebug()<<"stage success";
+    _game->initWorld();qDebug()<<"stage success";
     this->setFixedSize(1800,900);
     this->setWindowFlags(Qt::SubWindow);
-    //timer = new QTimer(this);
-    //connect(timer,SIGNAL(timeout()),this,SLOT(randomMove()));
-        //randomMove()为自定义槽函数
 
-    //timer->start(3);
-    //timer->setInterval(500);
+    QLabel * gold_label = new QLabel(this);
+    gold_label->setText("金币"+QString::number(_game->gold));
+    gold_label->setFixedSize(100,50);
+    gold_label->move(0,150);
 
-    //qsrand(QTime(0,0,0).secsTo(QTime::currentTime()));//设置随机种子
+    over_timer = new QTimer();
+    connect(over_timer, &QTimer::timeout, this, [=](){
+              gold_label->setText("金币"+QString::number(_game->gold));
+            if(_game->over == 1)
+            {
+                QMediaPlayer *player = new QMediaPlayer;
+                player->setMedia(QUrl("qrc:/sounds/biu.wav"));
+                player->setVolume(30);
+                player->play();
+                QMessageBox::information(this, tr("提示"), tr("满身疮痍"));
+                over_timer->stop();
 
+                emit reChooseSignal();
+
+            }
+            else if(_game->over == 2)
+            {
+                QMediaPlayer *player = new QMediaPlayer;
+                player->setMedia(QUrl("qrc:/sounds/spell_clear.wav"));
+                player->setVolume(30);
+                player->play();
+                QMessageBox::information(this, tr("提示"),tr("Stage Cleared"));
+                over_timer->stop();
+                emit reChooseSignal();
+            }
+
+    });
+    over_timer->start(3);
 
     connect( _game, &World::update_signal, this, static_cast<void (Stage::*)()>(&Stage::repaint));
 

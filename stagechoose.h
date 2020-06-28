@@ -3,7 +3,7 @@
 
 #include <QMainWindow>
 #include <QList>
-#include "plants.h"
+
 #include "stage.h"
 class StageChoose : public QMainWindow
 {
@@ -11,14 +11,14 @@ class StageChoose : public QMainWindow
 public:
     explicit StageChoose(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent*);
-    void next_task();
+    //void next_task();
 signals:
     void chooseBack();
 protected:
 
 
 private:
-    QList<plants*> plants_list;
+    //QList<plants*> plants_list;
     Stage *stage;
 
 };

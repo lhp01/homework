@@ -1,15 +1,7 @@
 <RCC>
     <qresource prefix="/pics">
-        <file>TileB.png</file>
         <file>bj.jpg</file>
         <file>duixiang.png</file>
-        <file>renwu.jpg</file>
-        <file>single.jpg</file>
-        <file>four.jpg</file>
-        <file>leaves.jpg</file>
-        <file>sunflower.jpg</file>
-        <file>plant.jpg</file>
-        <file>double.jpg</file>
         <file>kaishi.jpg</file>
         <file>begin.jpg</file>
         <file>exit.jpg</file>
@@ -17,6 +9,14 @@
         <file>2.jpg</file>
         <file>3.jpg</file>
         <file>tongguan.jpg</file>
+        <file>four.png</file>
+        <file>double.png</file>
+        <file>douzi.png</file>
+        <file>renwu.png</file>
+        <file>leaves.png</file>
+        <file>leaves_d.png</file>
+        <file>leaves_f.png</file>
+        <file>leaves_s.png</file>
     </qresource>
     <qresource prefix="/sounds">
         <file>2953.mp3</file>
@@ -25,5 +25,7 @@
         <file>beijing.mp3</file>
         <file>jujue.mp3</file>
         <file>shengli.mp3</file>
+        <file>biu.wav</file>
+        <file>spell_clear.wav</file>
     </qresource>
 </RCC>
