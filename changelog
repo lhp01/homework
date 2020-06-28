@@ -11,4 +11,4 @@ world将用到QTmap的初始代码（fruit，player）的地方加以修改，�
 加入World::generate_attack，World::check_plant_attack()实现植物攻击（3种植物攻击速度不同），并且让僵尸失去对应的生命值
 World::generate_plant实现植物种植以及升级（有地区限制，不能超出草坪），generate_zombie()实现僵尸的出现以及运动，运动是单项直线的。植物僵尸有生命值。
 World::check_zombie_attack()是僵尸的攻击，可以吃掉植物。按钮下方显示了全局变量金币，初始1000(见world构造函数).僵尸对象死亡获得五十金币，植物对象
-种植减少100金币。
+种植减少100金币。。
